@@ -27,6 +27,10 @@ function generateHtmlContent(dir, level = 0) {
   content += '<ul>\n';
 
   files.forEach(file => {
+    if (file === '.git' || file === 'README.md' || file === path.basename(__filename)) {
+      return;
+    }
+
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
     const relativePath = path.relative('.', filePath).replace(/\\/g, '/');
